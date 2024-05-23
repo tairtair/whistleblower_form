@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Whistleblower Form</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #fff;
+        margin: 0;
+        padding: 0;
+      }
+      .header {
+        background-color: #f7f7f7;
+        padding: 10px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .header img {
+        max-width: 220px;
+      }
+      .language-selector {
+        text-align: right;
+        margin: 20px;
+      }
+      .switch {
+        position: relative;
+        display: inline-block;
+        margin: 0 5px;
+      }
+      .switch > span {
+        position: absolute;
+        top: 14px;
+        pointer-events: none;
+        font-family: "Helvetica", Arial, sans-serif;
+        font-weight: bold;
+        font-size: 12px;
+        text-transform: uppercase;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+        width: 50%;
+        text-align: center;
+      }
+      input.check-toggle-round-flat:checked ~ .off {
+        color: #0092cb;
+      }
+      input.check-toggle-round-flat:checked ~ .on {
+        color: #fff;
+      }
+      .switch > span.on {
+        left: 0;
+        padding-left: 2px;
+        color: #0092cb;
+      }
+      .switch > span.off {
+        right: 0;
+        padding-right: 4px;
+        color: #fff;
+      }
+      .check-toggle {
+        position: absolute;
+        margin-left: -9999px;
+        visibility: hidden;
+      }
+      .check-toggle + label {
+        display: block;
+        position: relative;
+        cursor: pointer;
+        outline: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      input.check-toggle-round-flat + label {
+        padding: 2px;
+        width: 97px;
+        height: 35px;
+        background-color: #0092cb;
+        -webkit-border-radius: 60px;
+        -moz-border-radius: 60px;
+        -ms-border-radius: 60px;
+        -o-border-radius: 60px;
+        border-radius: 60px;
+      }
+      input.check-toggle-round-flat + label:before,
+      input.check-toggle-round-flat + label:after {
+        display: block;
+        position: absolute;
+        content: "";
+      }
+      input.check-toggle-round-flat + label:before {
+        top: 2px;
+        left: 2px;
+        bottom: 2px;
+        right: 2px;
+        background-color: #0092cb;
+        -webkit-border-radius: 60px;
+        -moz-border-radius: 60px;
+        -ms-border-radius: 60px;
+        -o-border-radius: 60px;
+        border-radius: 60px;
+      }
+      input.check-toggle-round-flat + label:after {
+        top: 4px;
+        left: 4px;
+        bottom: 4px;
+        width: 48px;
+        background-color: #fff;
+        -webkit-border-radius: 52px;
+        -moz-border-radius: 52px;
+        -ms-border-radius: 52px;
+        -o-border-radius: 52px;
+        border-radius: 52px;
+        -webkit-transition: margin 0.2s;
+        -moz-transition: margin 0.2s;
+        -o-transition: margin 0.2s;
+        transition: margin 0.2s;
+      }
+      input.check-toggle-round-flat:checked + label:after {
+        margin-left: 44px;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .container p,
+      .container ul,
+      .container ol {
+        margin-bottom: 20px;
+      }
+      .container ul,
+      .container ol {
+        padding-left: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+      .form-group input[type="radio"] {
+        width: auto;
+        margin-right: 10px;
+      }
+      .form-group .radio-group {
+        display: flex;
+        align-items: center;
+      }
+      .form-group .radio-group label {
+        margin: 0 10px 0 0;
+      }
+      .form-group button {
+        background-color: #0092cb;
+        color: #fff;
+        padding: 15px 35px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-top: 20px;
+      }
+      .form-group button:hover {
+        background-color: #007ba7;
+      }
+      #thank-you-message {
+        display: none;
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #e9f6ff;
+        border: 1px solid #0092cb;
+        border-radius: 4px;
+        color: #0092cb;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img
+        src="https://www.nn-airport.kz/img/astanalogo.png"
+        alt="Custom Logo"
+      />
+      <img
+        src="https://www.nn-airport.kz/img/logo_airport.png"
+        alt="Custom Logo"
+      />
+    </div>
+    <div class="language-selector">
+      <div class="switch">
+        <input
+          id="language-toggle"
+          class="check-toggle check-toggle-round-flat"
+          type="checkbox"
+        />
+        <label for="language-toggle"></label>
+        <span class="on">EN</span>
+        <span class="off">RU</span>
+      </div>
+    </div>
+    <div class="container">
+      <h1 data-en="Whistleblower Form" data-ru="Форма информатора">
+        Whistleblower Form
+      </h1>
+      <p
+        data-en="JSC &#34;Nursultan Nazarbayev International Airport&#34; policy is to welcome the employees&#39; efforts that ensures and contributes to the compliance with ethical standards and local legislations. If an employee has knowledge of or a concern of the illegal or fraudulent activity, he/she is encouraged to report on immediate basis if any of the specified actions are happening, have happened or are likely to happen."
+        data-ru='Политика АО "Международный Аэропорт Нурсултан Назарбаев" приветствует усилия сотрудников, которые обеспечивают и способствуют соблюдению этических стандартов и местного законодательства. Если сотрудник знает о незаконной или мошеннической деятельности или обеспокоен ею, ему/ей рекомендуется немедленно сообщить, если какие-либо из указанных действий происходят, произошли или, вероятно, произойдут.'
+      >
+        ADA's policy is to welcome the employees' efforts that ensures and
+        contributes to the compliance with ethical standards and local
+        legislations. If an employee has knowledge of or a concern of the
+        illegal or fraudulent activity, he/she is encouraged to report on
+        immediate basis if any of the specified actions are happening, have
+        happened or are likely to happen.
+      </p>
+      <p
+        data-en="All employees are encouraged to report any serious concerns in the below form."
+        data-ru="Всем сотрудникам рекомендуется сообщать о любых серьезных проблемах в форме ниже."
+      >
+        All employees are encouraged to report any serious concerns in the below
+        form.
+      </p>
+      <p
+        data-en="Any information you have will be useful, especially the following:"
+        data-ru="Любая имеющаяся у вас информация будет полезна, особенно следующая:"
+      >
+        Any information you have will be useful, especially the following:
+      </p>
+      <ul>
+        <li data-en="Identity of wrongdoer" data-ru="Личность правонарушителя">
+          Identity of wrongdoer
+        </li>
+        <li data-en="Date" data-ru="Дата">Date</li>
+        <li data-en="Location" data-ru="Местоположение">Location</li>
+        <li data-en="Details of concern" data-ru="Подробности проблемы">
+          Details of concern
+        </li>
+      </ul>
+      <p
+        data-en="<strong>Note:</strong>"
+        data-ru="<strong>Примечание:</strong>"
+      >
+        <strong>Note:</strong>
+      </p>
+      <p
+        data-en="<strong>Types of Concerns to be Reported</strong>"
+        data-ru="<strong>Типы проблем, о которых следует сообщать</strong>"
+      >
+        Types of Concerns to be Reported
+      </p>
+      <p
+        data-en="This form deals with reporting concerns related to the following areas:"
+        data-ru="Эта форма предназначена для сообщения о проблемах, связанных со следующими областями:"
+      >
+        This form deals with reporting concerns related to the following areas:
+      </p>
+      <ol>
+        <li data-en="Financial Reporting" data-ru="Финансовая отчетность">
+          Financial Reporting
+        </li>
+        <li
+          data-en="Suspected Fraudulent Activity"
+          data-ru="Подозрение на мошенничество"
+        >
+          Suspected Fraudulent Activity
+        </li>
+        <li
+          data-en="Breaches of the code, other compliance policies and laws and regulations"
+          data-ru="Нарушение кодекса, других политик соблюдения и законов и нормативных актов"
+        >
+          Breaches of the code, other compliance policies and laws and
+          regulations
+        </li>
+        <li
+          data-en="Retaliation or retribution against an individual who reports a concern"
+          data-ru="Реталиация или возмездие в отношении лица, сообщившего о проблеме"
+        >
+          Retaliation or retribution against an individual who reports a concern
+        </li>
+      </ol>
+      <form
+        id="whistleblower-form"
+        action="/submit-form"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="form-group">
+          <label for="subject" data-en="Subject" data-ru="Тема">Subject</label>
+          <input type="text" id="subject" name="subject" required />
+        </div>
+        <div class="form-group">
+          <label
+            data-en="I wish to remain anonymous"
+            data-ru="Я хочу остаться анонимным"
+            >I wish to remain anonymous</label
+          >
+          <div class="radio-group">
+            <input
+              type="radio"
+              id="anonymous_yes"
+              name="anonymous"
+              value="yes"
+              required
+              onclick="toggleFields(true)"
+            />
+            <label for="anonymous_yes" data-en="Yes" data-ru="Да">Yes</label>
+            <input
+              type="radio"
+              id="anonymous_no"
+              name="anonymous"
+              value="no"
+              required
+              onclick="toggleFields(false)"
+            />
+            <label for="anonymous_no" data-en="No" data-ru="Нет">No</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name" data-en="Your Name" data-ru="Ваше имя"
+            >Your Name</label
+          >
+          <input type="text" id="name" name="name" />
+        </div>
+        <div class="form-group">
+          <label
+            for="contact"
+            data-en="Contact Number"
+            data-ru="Контактный номер"
+            >Contact Number</label
+          >
+          <input type="tel" id="contact" name="contact" />
+        </div>
+        <div class="form-group">
+          <label
+            for="email"
+            data-en="Your Email Address"
+            data-ru="Ваш адрес электронной почты"
+            >Your Email Address</label
+          >
+          <input type="email" id="email" name="email" />
+        </div>
+        <div class="form-group">
+          <label
+            for="reporting_date"
+            data-en="Date of Reporting"
+            data-ru="Дата отчета"
+            >Date of Reporting</label
+          >
+          <input
+            type="date"
+            id="reporting_date"
+            name="reporting_date"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="wrongdoer"
+            data-en="Identity of Wrongdoer"
+            data-ru="Личность правонарушителя"
+            >Identity of Wrongdoer</label
+          >
+          <input type="text" id="wrongdoer" name="wrongdoer" />
+        </div>
+        <div class="form-group">
+          <label
+            for="location"
+            data-en="Location of Incident"
+            data-ru="Местоположение инцидента"
+            >Location of Incident</label
+          >
+          <input type="text" id="location" name="location" />
+        </div>
+        <div class="form-group">
+          <label
+            for="concern"
+            data-en="Your Concern"
+            data-ru="Ваше беспокойство"
+            >Your Concern</label
+          >
+          <textarea id="concern" name="concern" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+          <label
+            for="document"
+            data-en="Supporting Document"
+            data-ru="Поддерживающий документ"
+            >Supporting Document</label
+          >
+          <input type="file" id="document" name="document" />
+        </div>
+        <div class="form-group">
+          <button type="submit" data-en="Send" data-ru="Отправить">Send</button>
+        </div>
+      </form>
+      <div id="thank-you-message">
+        <h2 data-en="Thank You!" data-ru="Спасибо!">Thank You!</h2>
+        <p
+          data-en="Thank you for submitting your valuable information. Your report has been received and will be reviewed promptly. We appreciate your efforts in helping us maintain a safe and compliant environment."
+          data-ru="Спасибо за предоставленную ценную информацию. Ваш отчет получен и будет оперативно рассмотрен. Мы ценим ваши усилия, направленные на то, чтобы помочь нам поддерживать безопасную и соответствующую требованиям среду."
+        >
+          Thank you for submitting your valuable information. Your report has
+          been received and will be reviewed promptly. We appreciate your
+          efforts in helping us maintain a safe and compliant environment.
+        </p>
+      </div>
+    </div>
+    <script>
+      function toggleFields(disable) {
+        document.getElementById("name").disabled = disable;
+        document.getElementById("contact").disabled = disable;
+        document.getElementById("email").disabled = disable;
+      }
+
+      document
+        .getElementById("whistleblower-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          var formData = new FormData(e.target);
+          const formProps = Object.fromEntries(formData);
+          console.log(formProps);
+          // fetch("/submit-form", {
+          //   method: "POST",
+          //   body: formData,
+          // })
+          //   .then((response) => response.json())
+          //   .then((data) => {
+          //     document.getElementById("whistleblower-form").reset();
+          //     document.getElementById("thank-you-message").style.display =
+          //       "block";
+          //   })
+          //   .catch((error) => {
+          //     console.error("Error:", error);
+          //     alert("There was an error submitting the form.");
+          //   });
+        });
+
+      function switchLanguage() {
+        var language = document.getElementById("language-toggle").checked
+          ? "ru"
+          : "en";
+        var elements = document.querySelectorAll("[data-en]");
+
+        elements.forEach(function (element) {
+          if (language === "en") {
+            element.innerHTML = element.getAttribute("data-en");
+          } else if (language === "ru") {
+            element.innerHTML = element.getAttribute("data-ru");
+          }
+        });
+      }
+
+      document
+        .getElementById("language-toggle")
+        .addEventListener("change", switchLanguage);
+
+      document.addEventListener("DOMContentLoaded", function () {
+        switchLanguage(); // Set default language on page load
+      });
+    </script>
+  </body>
+</html>
